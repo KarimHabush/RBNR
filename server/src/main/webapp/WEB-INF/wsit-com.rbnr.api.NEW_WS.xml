@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <definitions 
+ xmlns="http://schemas.xmlsoap.org/wsdl/" 
+ xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+ xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+ xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="NEW_WS" targetNamespace="http://api.rbnr.com/" xmlns:tns="http://api.rbnr.com/" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:fi="http://java.sun.com/xml/ns/wsit/2006/09/policy/fastinfoset/service" xmlns:tcp="http://java.sun.com/xml/ns/wsit/2006/09/policy/soaptcp/service" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702" xmlns:sc="http://schemas.sun.com/2006/03/wss/server" xmlns:wspp="http://java.sun.com/xml/ns/wsit/policy" 
+ >
+    <message name="addnew"/>
+    <message name="addnewResponse"/>
+    <message name="deletenew"/>
+    <message name="deletenewResponse"/>
+    <message name="updatenew"/>
+    <message name="updatenewResponse"/>
+    <message name="getall"/>
+    <message name="getallResponse"/>
+    <message name="getbyuser"/>
+    <message name="getbyuserResponse"/>
+    <message name="getone"/>
+    <message name="getoneResponse"/>
+    <message name="addreaction"/>
+    <message name="addreactionResponse"/>
+    <message name="deletereaction"/>
+    <message name="deletereactionResponse"/>
+    <message name="getreaction"/>
+    <message name="getreactionResponse"/>
+    <message name="addcomment"/>
+    <message name="addcommentResponse"/>
+    <message name="deletecomment"/>
+    <message name="deletecommentResponse"/>
+    <portType name="NEW_WS">
+        <operation name="addnew">
+            <input message="tns:addnew"/>
+            <output message="tns:addnewResponse"/>
+        </operation>
+        <operation name="deletenew">
+            <input message="tns:deletenew"/>
+            <output message="tns:deletenewResponse"/>
+        </operation>
+        <operation name="updatenew">
+            <input message="tns:updatenew"/>
+            <output message="tns:updatenewResponse"/>
+        </operation>
+        <operation name="getall">
+            <input message="tns:getall"/>
+            <output message="tns:getallResponse"/>
+        </operation>
+        <operation name="getbyuser">
+            <input message="tns:getbyuser"/>
+            <output message="tns:getbyuserResponse"/>
+        </operation>
+        <operation name="getone">
+            <input message="tns:getone"/>
+            <output message="tns:getoneResponse"/>
+        </operation>
+        <operation name="addreaction">
+            <input message="tns:addreaction"/>
+            <output message="tns:addreactionResponse"/>
+        </operation>
+        <operation name="deletereaction">
+            <input message="tns:deletereaction"/>
+            <output message="tns:deletereactionResponse"/>
+        </operation>
+        <operation name="getreaction">
+            <input message="tns:getreaction"/>
+            <output message="tns:getreactionResponse"/>
+        </operation>
+        <operation name="addcomment">
+            <input message="tns:addcomment"/>
+            <output message="tns:addcommentResponse"/>
+        </operation>
+        <operation name="deletecomment">
+            <input message="tns:deletecomment"/>
+            <output message="tns:deletecommentResponse"/>
+        </operation>
+    </portType>
+    <binding name="NEW_WSPortBinding" type="tns:NEW_WS">
+        <operation name="addnew">
+            <input></input>
+            <output></output>
+        </operation>
+        <operation name="deletenew">
+            <input></input>
+            <output></output>
+        </operation>
+        <operation name="updatenew">
+            <input></input>
+            <output></output>
+        </operation>
+        <operation name="getall">
+            <input></input>
+            <output></output>
+        </operation>
+        <operation name="getbyuser">
+            <input></input>
+            <output></output>
+        </operation>
+        <operation name="getone">
+            <input></input>
+            <output></output>
+        </operation>
+        <operation name="addreaction">
+            <input></input>
+            <output></output>
+        </operation>
+        <operation name="deletereaction">
+            <input></input>
+            <output></output>
+        </operation>
+        <operation name="getreaction">
+            <input></input>
+            <output></output>
+        </operation>
+        <operation name="addcomment">
+            <input></input>
+            <output></output>
+        </operation>
+        <operation name="deletecomment">
+            <input></input>
+            <output></output>
+        </operation>
+    </binding>
+    <service name="NEW_WS">
+        <port name="NEW_WSPort" binding="tns:NEW_WSPortBinding"/>
+    </service>
+</definitions>
