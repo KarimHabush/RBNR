@@ -1,9 +1,10 @@
-### Projet Web Services
+## Projet Web Services
 Réalisation d'un réseau social pour le partage des annonces (news). 
-### Outils et langages de programmation
-* Front-end : React JS
-* Back-end : Java SOAP web services 
+## Outils et langages de programmation
+* Client : React JS
+* Server : Java SOAP web services 
 * Package manager : npm, maven
+## Server
 ### API Docs
 * News api : 
   * `addnew(username, title , content)` ajouter une annonce. 
@@ -90,11 +91,31 @@ Réalisation d'un réseau social pour le partage des annonces (news).
 ### La classe SharingFilter 
 La classe SharingFilter permet d'ajouter les "Headers" nécessaire pour que le client pourra envoyer des requete et recevoir une valide réponse ( [voir le code](./server/src/main/java/com/rbnr/api/SharingFilter.java) )  : 
 
-```shell
+```java
 http.addHeader("Access-Control-Allow-Origin", "karimhabush.github.io");
 http.addHeader("Access-Control-Allow-Credentials", "true");
 http.addHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, HEAD, OPTIONS");
 http.addHeader("Access-Control-Allow-Headers", "Content-Type, text/xml , SOAPAction, User-Agent");
 ```
+## Client 
+### Les cas d'utilisation
+ * Sign Up 
+ * Sign In 
+ * Ajouter une annonce 
+ * Ajouter un commentaire
+ * Like / Dislike commentaire 
+ * Visiter profile 
+ * Visiter la page de l'annonce
+
+### Video de simulation 
+ 
+ 
+## Deployement en github pages ( [visiter le site](https://karimhabush.github.io/RBNR) ) 
+ * Client : L'utilisation du package gh-pages pour reactJS. 
+ * Server : 
+   * Le port forwarding vers ma machine :) 
+   * L'utilisation du port sécurisé 8181 
+   
+*Nous seront très honorer si vous testez notre application, il faut juste nous contacter pour lancer le serveur.* 
 
 
