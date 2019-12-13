@@ -13,12 +13,19 @@ class User extends Component {
 	
 	  this.state = {
 	  	loading : true,
-	  	news : {}
+	  	news : {},
+	  	user : {},
+	  	added : false
 	  };
 	}
 
 	componentDidMount() {
-		const url = 'http://localhost:8080/RBNR-1.0-SNAPSHOT/NEW_WS?wsdl';
+		this.getNews();
+		this.getUserInfo();
+	}
+
+    getNews = () => {
+    	const url = 'http://localhost:8080/RBNR-1.0-SNAPSHOT/NEW_WS?wsdl';
         var self = this;
         const args = {
             username : this.props.match.params.handle
@@ -34,8 +41,52 @@ class User extends Component {
               });
     }
 
+    getUserInfo = () => {
+    	const url = 'http://localhost:8080/RBNR-1.0-SNAPSHOT/WS_TEST?wsdl';
+        var self = this;
+        const args = {
+            username : this.props.match.params.handle
+        }
+            soap.createClient(url, function(err, client){
+                  client.getinfo(args, function(err, result) {
+                      if(JSON.parse(result.return).status ==200){
+                        self.setState({user : JSON.parse(result.return)})
+                        self.isFriend();
+                      }
+                  });
+              });	
+    }
+
+    isFriend = () => {
+    	const url = 'http://localhost:8080/RBNR-1.0-SNAPSHOT/WS_TEST?wsdl';
+        var self = this;
+        const args = {
+            username : localStorage.getItem('token')
+        }
+        soap.createClient(url, function(err, client){
+              client.getinfo(args, function(err, result) {
+                  if(JSON.parse(result.return).status ==200){
+                    for (var i = 0; i < JSON.parse(result.return).friends.length; i++){
+	                        console.log(JSON.parse(result.return).friends[i]);
+	                      	if (JSON.parse(result.return).friends[i] === self.props.match.params.handle){
+	                        	self.setState({added : true});
+	                        	console.log(self.state.added);
+                      		}
+                    	}
+                  }
+              });
+          });	
+    	
+    }
+
+    follow = () => {
+    	if(this.state.added)
+    		this.deletefriend();
+    	else this.addfriend();
+    }
+
     addfriend = () => {
-    	const url = 'http://localhost:8080/RBNR-1.0-SNAPSHOT/NEW_WS?wsdl';
+    	const url = 'http://localhost:8080/RBNR-1.0-SNAPSHOT/WS_TEST?wsdl';
         var self = this;
         const args = {
             friend : this.props.match.params.handle,
@@ -45,8 +96,26 @@ class User extends Component {
               client.addfriend(args, function(err, result) {
                   if(JSON.parse(result.return).status ==200){
                     self.setState({added : true});
-                    
+                   
                   }
+              });
+          });
+    
+    }
+
+    deletefriend = () => {
+    	const url = 'http://localhost:8080/RBNR-1.0-SNAPSHOT/WS_TEST?wsdl';
+        var self = this;
+        const args = {
+            friend : this.props.match.params.handle,
+            username : localStorage.getItem("token")
+        }
+        soap.createClient(url, function(err, client){
+              client.deletefriend(args, function(err, result) {
+                
+                    self.setState({added : true});
+                   
+                  
               });
           });
     
@@ -56,26 +125,26 @@ class User extends Component {
 		return (
 			<div>
 				<Container fixed style={{paddingTop:100}}>
-					<Grid container >
+					<Grid container style={{backgroundColor:"#4993D1", color:"#fff"}}>
 						<Typography
 		                    variant="h5"
+		                    className="p-2"
 		                >
-		                    @{this.props.match.params.handle}
+		                    {this.state.user.firstname} {this.state.user.lastname}
 		                </Typography>
-		                <Button className="ml-auto" style={{backgroundColor:"#4993D1",color:"#fff"}} color="primary" onClick={this.addfriend} >
-                            Add Friend
-                        </Button>
+		                <Button size="small" className="ml-auto my-2 mr-2"  style={{backgroundColor:"#fff",color:"#4993D1"}} color="primary" onClick={this.deletefriend} >
+                        	{
+		                	this.state.added ? "UnFollow":  "Follow"}
+                        		</Button>
+		                
+
                     </Grid>
-                    <Divider className="mt-2 mb-2" />
-                    <Divider className="mt-2 mb-2" />
+                    	
+
                     
                     <Grid container >
-                    <Typography
-		                    variant="body1"
-		                >
-		                    Latest news : 
-		                </Typography>
-                        <Grid item xs={12}>
+	                    
+	                        <Grid item xs={12}>
                            {this.state.loading ? (
                                 <Typography style={{marginTop : 200}}>Loading...</Typography>
                             ) : (

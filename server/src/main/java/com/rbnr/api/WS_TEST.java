@@ -133,6 +133,44 @@ public class WS_TEST {
     }
 
 
+    @WebMethod(operationName = "getinfo")
+    public String getinfo(
+            @WebParam(name = "username") String username) {
+        //Connection 
+        DBConnection conn = new DBConnection();
+
+        //Mapping the table
+        MappingManager manager = new MappingManager(conn.getSession());
+        
+        
+        //Accessor 
+        UserAccessor userAccessor = manager.createAccessor(UserAccessor.class);
+        
+        //Sign up 
+        JSONObject obj = new JSONObject();
+
+
+        Row r = userAccessor.getOne(username).one();
+        if(r !=null) {
+                obj.put("status", 200);
+                obj.put("username", r.getString("username"));
+                obj.put("firstname", r.getString("firstname"));
+                obj.put("lastname", r.getString("lastname"));  
+                obj.put("friends",r.getList("friends", String.class));
+        }
+        else {
+            JSONObject userobj = new JSONObject();
+            userobj.put("username","Username does not exist!");
+            obj.put("status", 404);
+            obj.put("errors", userobj);
+            
+        }
+        //Close Connection 
+        conn.close();
+        return obj.toString();
+    }
+
+
 
 @WebMethod(operationName = "deleteuser")
     public String deleteuser(
@@ -276,13 +314,13 @@ public class WS_TEST {
     public String deletefriend(
             @WebParam(name = "username") String username,
             @WebParam(name = "friend") String friend) {
-        //Connection 
-	DBConnection conn = new DBConnection();
+           //Connection 
+    DBConnection conn = new DBConnection();
 
-	//Mapping the table
+    //Mapping the table
         MappingManager manager = new MappingManager(conn.getSession());
         
-		
+        
         //Accessor 
         UserAccessor userAccessor = manager.createAccessor(UserAccessor.class);
         
@@ -295,23 +333,29 @@ public class WS_TEST {
             obj.put("errors", validator.getErrors());
             return obj.toString();
         }
-
-
-
         List<String> friends = new ArrayList<String>();
         friends.add(friend);
         
-        for(Row r :  userAccessor.deletefriend(friends,username)) {
-        	
-        	if(r.getBool(0)) {
-        		obj.put("status", 200);
-        		obj.put("success", "Friend deleted successfuly!");
-        	}
-        	else {
-        		obj.put("status", 500);
-        		obj.put("error", "Username not found!");
-        	}
+        Row f = userAccessor.getOne(friend).one();
+        if(f !=null && !username.equals(friend)) {
+            for(Row row :  userAccessor.deletefriend(friends,username)) {
+            
+                if(row.getBool(0)) {
+                    obj.put("status", 200);
+                    obj.put("success", "Friend deleted successfuly!");
+                }
+                else {
+                    obj.put("status", 500);
+                    obj.put("error", "Username not found");
+                }
+            }   
+        
         }
+        else {
+            obj.put("status", 500);
+            obj.put("error", "Friend's username not accepted!");
+        }
+        
         
         //Close Connection 
         conn.close();

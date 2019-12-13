@@ -49,7 +49,7 @@ class Login extends Component {
             username: this.state.username,
             password: this.state.password,
         };
-        const url = 'http://localhost:8080/RBNR-1.0-SNAPSHOT/WS_TEST?wsdl';
+        const url = 'https://10.0.206.225:8181/RBNR-1.0-SNAPSHOT/WS_TEST?wsdl';
         var self = this;
         soap.createClient(url, function(err, client){
                 if(client===undefined){

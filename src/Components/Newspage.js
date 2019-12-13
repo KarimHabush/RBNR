@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import { Link } from "react-router-dom";
 
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -72,14 +73,14 @@ class Newspage extends Component {
             if(this.state.disliked){
                 soap.createClient(url, function(err, client){
                       client.deletereaction(args, function(err, result) {
-                                    self.setState({disliked : !self.state.disliked})
+                                    self.setState({disliked : false})
                       });
                   });       
             }
             else {
                 soap.createClient(url, function(err, client){
                       client.addreaction(args, function(err, result) {
-                                    self.setState({disliked : !self.state.disliked});
+                                    self.setState({disliked : true});
                                     self.setState({liked : false});
                       });
                   });          
@@ -91,14 +92,14 @@ class Newspage extends Component {
                 soap.createClient(url, function(err, client){
                       client.deletereaction(args, function(err, result) {
 
-                            self.setState({liked : !self.state.disliked});
+                            self.setState({liked : false});
                       });
                   });       
             }
             else {
                 soap.createClient(url, function(err, client){
                       client.addreaction(args, function(err, result) {
-                            self.setState({liked : !self.state.disliked})
+                            self.setState({liked : true})
                             self.setState({disliked : false});
                       });
                   });          
@@ -123,6 +124,8 @@ class Newspage extends Component {
                   client.getone(args, function(err, result) {
                              if(JSON.parse(result.return).status ===200){
                                 self.setState({news : JSON.parse(result.return).results})
+                                self.setState({loading : false})
+                                console.log(self.state.news)
                                 for (var i = 0; i < self.state.news.reactions.length; i++){
                                   if (self.state.news.reactions[i].username === localStorage.getItem('token')){
                                     if(self.state.news.reactions[i].score ===1)
@@ -161,6 +164,7 @@ class Newspage extends Component {
                                     color: "#4993D1",
                                     marginRight: 3
                                 }}
+                                component={Link} to={"/users/"+this.state.news.username}
                             >
                                 @{this.state.news.username}
                             </Typography>
@@ -234,17 +238,11 @@ class Newspage extends Component {
                              onClick={()=> this.react(1)}
                         >
                                 
-                            {this.state.liked ? (
+                            
                                 <ThumbUpAltIcon
-
-
-                                style={{ color: "#1b998b", marginRight: 3 }}
+                                style={this.state.liked ? ( { color: "#1b998b", marginRight: 3 }) : ({ color: "#aaaaaa", marginRight: 3 })}
                             />
-                            ):(<ThumbUpAltIcon
-
-
-                                style={{ color: "#aaaaaa", marginRight: 3 }}
-                            />)}
+                            
                             Like
                         </Button>
 
@@ -305,8 +303,9 @@ class Newspage extends Component {
                     <DialogContent style={{borderLeft:"5px solid #4993D1",backgroundColor:"#fafafa"}}>
                         <Typography className="my-2">Comments : </Typography>
 
+                        {this.state.loading? (null) : (
 
-                        {this.state.news.comments? (
+                            (this.state.news.comments!=="[]") ? (
                             this.state.news.comments.replace('[(','').replace(')]','').split('), (').map(comment => (
                                  <Grid container alignItems="center">
                             
@@ -366,7 +365,8 @@ class Newspage extends Component {
                                     </Typography>
                                 </Grid>
                             </CardContent>
-                            )}
+                            ))}
+                        
 
                     </DialogContent>
                 </Dialog>

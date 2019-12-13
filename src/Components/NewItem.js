@@ -50,11 +50,12 @@ class NewItem extends Component {
                             >
                                 shared some news
                             </Typography>
-                            <TimeAgo
-                                minPeriod="30"
-                                style={{ color: "#777777" }}
-                                date={this.props.createdAt}
-                            />
+                            <Typography
+                                
+                                style={{ fontSize:12,color: "#777777" }}
+                            >
+                            {this.props.createdAt}
+                            </Typography>
                             .
                         </Grid>
                         <Grid container>

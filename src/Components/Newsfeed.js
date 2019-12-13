@@ -3,24 +3,12 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
-import Tooltip from "@material-ui/core/Tooltip";
-import Fab from "@material-ui/core/Fab";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import NewItem from "./NewItem";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
-import Avatar from "@material-ui/core/Avatar";
-import IconButton from "@material-ui/core/IconButton";
-import FormControl from "@material-ui/core/FormControl";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import Input from "@material-ui/core/Input";
-import InputLabel from "@material-ui/core/InputLabel";
 import Button from "@material-ui/core/Button";
-import AddIcon from "@material-ui/icons/Add";
 import InputAdornment from '@material-ui/core/InputAdornment';
 import ArtTrackIcon from '@material-ui/icons/ArtTrack';
 
@@ -77,12 +65,12 @@ class Newsfeed extends Component {
         if(!localStorage.token)
             this.props.history.push("/login");
         else{
-            const url = 'http://localhost:8080/RBNR-1.0-SNAPSHOT/NEW_WS?wsdl';
+            const url = 'https://localhost:8181/RBNR-1.0-SNAPSHOT/NEW_WS?wsdl';
         var self = this;
         const args = {}
             soap.createClient(url, function(err, client){
                   client.getall(args, function(err, result) {
-                      if(JSON.parse(result.return).status ==200){
+                      if(JSON.parse(result.return).status === 200){
                         self.setState({news : JSON.parse(result.return).results})
                         self.setState({loading : false});
                         

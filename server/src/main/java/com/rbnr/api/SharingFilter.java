@@ -16,6 +16,9 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletResponse;
 
+
+// Used to allow requests from client 
+
 @WebFilter(filterName = "SharingFilter", urlPatterns = {"/*"})
 public class SharingFilter implements Filter {
 
@@ -26,10 +29,10 @@ public class SharingFilter implements Filter {
         if (response instanceof HttpServletResponse) {
           log.info("Adding headers");
           HttpServletResponse http = (HttpServletResponse) response;
-          http.addHeader("Access-Control-Allow-Origin", "*");
+          http.addHeader("Access-Control-Allow-Origin", "http://localhost:3000");
           http.addHeader("Access-Control-Allow-Credentials", "true");
           http.addHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, HEAD, OPTIONS");
-          http.addHeader("Access-Control-Allow-Headers", "SOAPAction, Content-Typedr");
+          http.addHeader("Access-Control-Allow-Headers", "Content-Type, SOAPAction, User-Agent");
 
         } 
         chain.doFilter(request, response);
