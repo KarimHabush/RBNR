@@ -108,12 +108,13 @@ http.addHeader("Access-Control-Allow-Headers", "Content-Type, text/xml , SOAPAct
  * Visiter la page de l'annonce
 
 ### Video de simulation 
- 
+[WATCH VIDEO](https://drive.google.com/open?id=1-EnwEHv3ywM5-ANDjqEoNJezRMi_GUT2)
  
 ## Deployement en github pages ( [visiter le site](https://karimhabush.github.io/RBNR) ) 
  * Client : L'utilisation du package gh-pages pour reactJS. 
  * Server : 
    * Le port forwarding vers ma machine :) 
+   * L'ajout des règles Firewall
    * L'utilisation du port sécurisé 8181 
    
 *Nous seront très honorer si vous testez notre application, il faut juste nous contacter pour lancer le serveur.* 
