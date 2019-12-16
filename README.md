@@ -103,7 +103,7 @@ http.addHeader("Access-Control-Allow-Headers", "Content-Type, text/xml , SOAPAct
  * Sign In 
  * Ajouter une annonce 
  * Ajouter un commentaire
- * Like / Dislike commentaire 
+ * Like / Dislike annonce
  * Visiter profile 
  * Visiter la page de l'annonce
 
