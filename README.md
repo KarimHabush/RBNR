@@ -11,7 +11,6 @@ Réalisation d'un réseau social pour le partage des annonces (news).
    * [Les cas d'utilisation](https://github.com/KarimHabush/RBNR#les-cas-dutilisation)
    * [Video de simulation](https://github.com/KarimHabush/RBNR#video-de-simulation)
  * [Deployement](https://github.com/KarimHabush/RBNR#video-de-simulation)
- * [WHAT NEXT?]
 
 ## Outils et langages de programmation
 * Client : React JS
