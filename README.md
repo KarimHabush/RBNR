@@ -13,9 +13,9 @@ Réalisation d'un réseau social pour le partage des annonces (news).
  * [Deployement](https://github.com/KarimHabush/RBNR#video-de-simulation)
 
 ## Outils et langages de programmation
-* Client : React JS
-* Server : Java SOAP web services 
-* Package manager : npm, maven
+* Client : React JS.
+* Server : Java SOAP web services.
+* Package manager : npm, maven.
 ## Server
 ### API Docs
 * News api : 
@@ -122,13 +122,13 @@ http.addHeader("Access-Control-Allow-Headers", "Content-Type, text/xml , SOAPAct
 ### Video de simulation 
 [WATCH VIDEO](https://drive.google.com/open?id=1-EnwEHv3ywM5-ANDjqEoNJezRMi_GUT2)
  
-## Deployement en github pages ( [visiter le site](https://karimhabush.github.io/RBNR) ) 
+## Deployement ( [visiter le site](https://karimhabush.github.io/RBNR) ) 
  * Client : L'utilisation du package gh-pages pour reactJS. 
  * Server : 
    * Le port forwarding vers ma machine :) 
    * L'ajout des règles Firewall
    * L'utilisation du port sécurisé 8181 
    
-*Nous seront très honorer si vous testez notre application, il faut juste nous contacter pour lancer le serveur.* 
+*Nous seront très honorés si vous testez notre application, il faut juste nous contacter pour lancer le serveur.* 
 
 
