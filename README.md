@@ -129,6 +129,4 @@ http.addHeader("Access-Control-Allow-Headers", "Content-Type, text/xml , SOAPAct
    * L'ajout des règles Firewall
    * L'utilisation du port sécurisé 8181 
    
-*Nous seront très honorés si vous testez notre application, il faut juste nous contacter pour lancer le serveur.* 
-
 
